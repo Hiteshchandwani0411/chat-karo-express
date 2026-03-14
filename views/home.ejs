@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <title>ChatKaro | Welcome</title>
+</head>
+<body>
+    <%- include("includes/navbar.ejs") %>
+
+    <div class="container">
+
+        <div class="app-description">
+            <div class="description-content">
+                <span class="sub-heading">About ChatKaro</span>
+                <h2>More than just a messaging tool</h2>
+                <p>
+                    ChatKaro is a full-stack CRUD application designed for seamless communication. 
+                    Whether you want to send quick reminders, manage conversations, or keep a log 
+                    of your daily interactions, our platform provides a clutter-free environment 
+                    with modern database management.
+                </p>
+            </div>
+        </div>
+    
+        <div class="hero-container">
+            <h1>Connect Instantly.</h1>
+            <p>A simple, fast, and professional way to manage your conversations and stay connected with your circle.</p>
+            <a href="/chats" class="cta-button">Explore Chats</a>
+        </div>
+    
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Real-time Messaging</h3>
+                <p>Fast and reliable message delivery to keep your conversations flowing smoothly.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Secure Storage</h3>
+                <p>Your chats are saved securely in our database with persistent data management.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <h3>Easy Management</h3>
+                <p>Edit or delete your messages anytime with our intuitive user interface.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

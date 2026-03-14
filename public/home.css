@@ -1,0 +1,159 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #764ba2;
+}
+
+/* Home Page specific background fix */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-gradient); /* White se gradient kar diya */
+    font-family: 'Inter', sans-serif;
+}
+
+.hero-container {
+    text-align: center;
+    color: white;
+    max-width: 100%;
+    padding: 40px 20px;
+    /* Hero section ko thoda floating feel dene ke liye glass background optional hai */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-container h1 {
+    font-size: 3.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.hero-container p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+    line-height: 1.6;
+    color: #f1f2f6;
+}
+
+.cta-button {
+    display: inline-block; /* Margin and padding handle karne ke liye */
+    background: white;
+    color: var(--accent-color); /* Theme color use kiya */
+    padding: 18px 45px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    background-color: #f8f9fa;
+}
+
+/* Features Grid Layout */
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* Mobile par apne aap niche aa jayenge */
+    margin-top: 50px;
+    max-width: 1200px;
+}
+
+/* Individual Feature Card */
+.feature-card {
+    background: rgba(255, 255, 255, 0.1); /* Transparent Glass */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 30px;
+    border-radius: 20px;
+    width: 280px;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Feature Icons */
+.feature-card i {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #f1f2f6;
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* App Description Section */
+.app-description {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 90px auto; /* Center alignment */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03); /* Extremely subtle glass */
+    border-radius: 40px;
+}
+
+.sub-heading {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.description-content h2 {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.description-content p {
+    color: #f1f2f6;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    opacity: 0.85;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Scroll Animation (Optional but Cool) */
+.app-description {
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

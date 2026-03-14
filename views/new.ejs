@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/new.css"> 
+    <link rel="stylesheet" href="/navbar.css"> 
+    <title>Create New Chat</title>
+</head>
+<body>
+    <%- include("includes/navbar.ejs") %>
+    <div class="create-card">
+        <h2>New Conversation</h2>
+        
+        <form action="/chats" method="post" class="create-form">
+            <div class="input-group">
+                <label>From</label>
+                <input type="text" placeholder="Your name" name="from" required />
+            </div>
+
+            <div class="input-group">
+                <label>To</label>
+                <input type="text" placeholder="Receiver's name" name="to" required />
+            </div>
+
+            <div class="input-group">
+                <label>Message</label>
+                <textarea name="msg" rows="3" placeholder="Write your message..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+            
+            <div style="margin-top: 15px;">
+                <a href="/chats" class="cancel-link">Cancel and go back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

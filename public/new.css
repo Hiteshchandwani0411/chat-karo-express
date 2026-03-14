@@ -1,0 +1,102 @@
+/* Universal Layout - Yeh sabse zaroori hai center karne ke liye */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --glass-bg: rgba(255, 255, 255, 0.95);
+    --accent-color: #764ba2;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex; /* Card ko center mein laane ke liye */
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-gradient);
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Card Styling */
+.create-card {
+    background: var(--glass-bg);
+    width: 95%; /* Mobile friendly */
+    max-width: 420px;
+    padding: 30px; /* Thoda kam kiya taaki content fit ho */
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    text-align: center;
+    box-sizing: border-box; /* Padding ko width ke andar rakhta hai */
+}
+
+h2 {
+    margin-top: 0;
+    color: #2d3436;
+    font-weight: 800;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #636e72;
+    margin-bottom: 5px;
+}
+
+.create-form input[type="text"], 
+.create-form textarea {
+    width: 100%;
+    border: 2px solid #edf2f7;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background: #f8fafc;
+}
+
+.create-form input:focus, 
+.create-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(118, 75, 162, 0.1);
+}
+
+/* Submit Button Fix */
+.submit-btn {
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    display: block; /* Ensure visibility */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(118, 75, 162, 0.3);
+}
+
+.cancel-link {
+    text-decoration: none;
+    color: #a0aec0;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.cancel-link:hover {
+    color: var(--accent-color);
+}

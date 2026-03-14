@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="/style.css"> 
+    <link rel="stylesheet" href="/navbar.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>All Chats</title>
+</head>
+<body>
+    <%- include("includes/navbar.ejs") %>
+    <h1>All Chats</h1>
+    
+    <form action="/chats/new" method="get">
+        <button class="create-btn">Create New Chat</button>
+    </form>
+
+    <% for(const chat of chats) { %>
+        <div class="chat-card">
+            <div class="chat-header">From: <%= chat.from %></div>
+            
+            <div class="msg-row">
+                <p class="msg-text"><%= chat.msg %></p>
+                
+                <div class="actions">
+                    <form action="/chats/<%= chat._id %>/edit" method="get">
+                        <button type="submit" class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                    </form>
+
+                    <form action="/chats/<%= chat._id %>?_method=DELETE" method="post">
+                        <button type="submit" class="delete-btn" onclick="confirmDelete(event, this.form)"><i class="fa-regular fa-trash-can"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="chat-header">To: <%= chat.to %></div>
+
+            <div class="time-info">
+                <span><%= chat.created_at.toString().split(" ").slice(0, 4).join(" ") %> at <%= chat.created_at.toString().split(" ")[4] %></span>
+                <% if (chat.updated_at) { %>
+                    <span class="edited-tag">(Edited)</span>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+
+    <script>
+        function confirmDelete(event, form) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#764ba2', // Aapka accent color
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                background: 'rgba(255, 255, 255, 0.95)', // Glass effect match
+                backdrop: `rgba(118, 75, 162, 0.2)`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Deleted!',
+                        text: 'Your message is being removed.',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500 
+                    });
+
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1500);
+                }
+            })
+        }
+    </script>
+</body>
+</html>
