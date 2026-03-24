@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Chat = require("./models/chat");
 const methodOverride = require("method-override");
+const ExpressError = require("./ExpressError");
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -38,22 +39,35 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/chats", async (req, res) => {
-  let chats = await Chat.find().sort({ created_at: -1});
-  // console.log(chats);
-  res.render("index", { chats });
-});
+app.get(
+  "/chats",
+  wrapAsync(async (req, res) => {
+    let chats = await Chat.find().sort({ created_at: -1 });
+    // console.log(chats);
+    res.render("index", { chats });
+  }),
+);
+
+app.get("/chats/:id", wrapAsync(async (req, res, next) => {
+  let {id} = req.params;
+  const chat = await Chat.findById(id);
+  // if (!chat) {
+  //   next(new ExpressError(404, "Chat not found"));
+  // }
+  // console.log(chat);
+  res.send(chat);
+}));
 
 app.get("/chats/new", (req, res) => {
   res.render("new");
 });
 
-app.get("/chats/:id/edit", async (req, res) => {
+app.get("/chats/:id/edit", wrapAsync(async (req, res) => {
   let { id } = req.params;
 
   let chat = await Chat.findById({ _id: id });
   res.render("edit", { chat });
-});
+}));
 
 app.post("/chats", (req, res) => {
   let { from, to, msg } = req.body;
@@ -77,7 +91,7 @@ app.post("/chats", (req, res) => {
     });
 });
 
-app.put("/chats/:id", async (req, res) => {
+app.put("/chats/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   let { msg: newMsg } = req.body;
 
@@ -89,16 +103,27 @@ app.put("/chats/:id", async (req, res) => {
 
   console.log(updatedChat);
   res.redirect("/chats");
-});
+}));
 
-app.delete("/chats/:id", async (req, res) => {
+app.delete("/chats/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
 
   let deletedChat = await Chat.findByIdAndDelete(id);
   console.log(deletedChat);
   res.redirect("/chats");
+}));
+
+app.use((err, req, res, next) => {
+  let { status=500, message="Some error occured" } = err;
+  res.status(status).send(message);
 });
 
 app.listen(port, (req, res) => {
   console.log(`Server is running on Port ${port}`);
 });
+
+function wrapAsync(fn) {
+  return function (req, res, next) {
+    fn(req, res, next).catch((err) => next(err));
+  };
+}
