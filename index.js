@@ -48,19 +48,19 @@ app.get(
   }),
 );
 
-app.get("/chats/:id", wrapAsync(async (req, res, next) => {
-  let {id} = req.params;
-  const chat = await Chat.findById(id);
-  // if (!chat) {
-  //   next(new ExpressError(404, "Chat not found"));
-  // }
-  // console.log(chat);
-  res.send(chat);
-}));
-
 app.get("/chats/new", (req, res) => {
   res.render("new");
 });
+
+app.get("/chats/:id", wrapAsync(async (req, res, next) => {
+  let {id} = req.params;
+  const chat = await Chat.findById(id);
+  if (!chat) {
+    next(new ExpressError(404, "Chat not found"));
+  }
+  console.log(chat);
+  res.send(chat);
+}));
 
 app.get("/chats/:id/edit", wrapAsync(async (req, res) => {
   let { id } = req.params;
@@ -114,6 +114,13 @@ app.delete("/chats/:id", wrapAsync(async (req, res) => {
 }));
 
 app.use((err, req, res, next) => {
+  if (err.name == "ValidationError") {
+    err = handleValidationErr(err);
+  }
+  next(err);
+})
+
+app.use((err, req, res, next) => {
   let { status=500, message="Some error occured" } = err;
   res.status(status).send(message);
 });
@@ -126,4 +133,10 @@ function wrapAsync(fn) {
   return function (req, res, next) {
     fn(req, res, next).catch((err) => next(err));
   };
+}
+
+const handleValidationErr = (err) => {
+  console.log("This is a Validation Error. Please follow rules");
+  console.dir(err.name);
+  return err;
 }
